@@ -1,0 +1,27 @@
+[
+
+     {
+        "timestamp": "2026-01-11T17:27:25Z",
+        "author": "FeGmbH",
+        "changes": "New features: added EULA and LICENSE files, implemented underground initial Installer, updated the Statistics class, added an Update Checker..",
+        "reason": "new Release",
+        "id": "update-043",
+        "v":"v0.4.3-alpha.dev"
+    },
+    {
+        "timestamp": "2024-06-10T12:34:56Z",
+        "author": "FeGmbH",
+        "changes": "Added tracking for lost games in Statistics class and updated Main.java to increment lost count.",
+        "reason": "Feature enhancement",
+        "id": "update-042",
+        "v":"v0.4.2-alpha.dev"
+    },
+        {
+        "timestamp": "2024-06-10T12:34:56Z",
+        "author": "FeGmbH",
+        "changes": "Added tracking for lost games in Statistics class and updated Main.java to increment lost count.",
+        "reason": "Feature enhancement",
+        "id": "update-041",
+        "v":"v0.4.1-alpha.dev"
+    }
+]

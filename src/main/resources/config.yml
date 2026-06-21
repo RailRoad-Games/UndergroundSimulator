@@ -1,0 +1,6 @@
+game:
+  maxPlayers: 16
+  difficulty: HARD
+player:
+  startHealth: 20
+  startGold: 100
