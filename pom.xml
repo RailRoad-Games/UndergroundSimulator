@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>de.qstudios.underground</groupId>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 https://maven.apache.org/xsd/maven-4.1.0.xsd"
+    root="true"
+    preserve.model.version="true">
+    <modelVersion>4.1.0</modelVersion>
+    <groupId>org.rrgames.underground</groupId>
     <artifactId>underground</artifactId>
     <version>v1.0-preview-SNAPSHOT</version>
+
     <developers>
         <developer>
             <id>fegmbh</id>
             <name>FeGmbH</name>
             <email>info@mr-quatsch.de</email>
-            <organization>QuatschStudios</organization>
+            <organization>RailRoad Games</organization>
             <organizationUrl>https://www.mr-quatsch.de/games</organizationUrl>
             <roles>
                 <role>Main (and only) Developer</role>
@@ -20,6 +22,7 @@
             <timezone>GMT+1</timezone>
         </developer>
     </developers>
+
     <distributionManagement>
         <repository>
             <id>nexus</id>
@@ -30,6 +33,7 @@
             <url>https://mvn.deepslatesmp.de/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+
     <repositories>
         <repository>
             <id>minecraft-libraries</id>
@@ -42,12 +46,27 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>
+
+    <properties>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.4.14</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
@@ -63,11 +82,6 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jexe</groupId>
-            <artifactId>jexe</artifactId>
-            <version>alpha-1.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -89,17 +103,14 @@
             <artifactId>bcrypt</artifactId>
             <version>0.10.2</version>
         </dependency>
-        <!-- SLF4J API -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.7</version>
         </dependency>
-        <!-- Logback Implementation -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.14</version>
         </dependency>
         <dependency>
             <groupId>com.mpatric</groupId>
@@ -112,12 +123,60 @@
             <version>1.0.18</version>
         </dependency>
         <dependency>
-    <groupId>de.qstudios.extmgr</groupId>
-    <artifactId>ExtManager</artifactId>
-    <version>v0.01</version>
+            <groupId>de.qstudios.extmgr</groupId>
+            <artifactId>ExtManager</artifactId>
+            <version>v0.03</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
+
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.5.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.4.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -132,7 +191,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -156,7 +214,7 @@
                                     implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>de.qstudios.underground.Main</mainClass>
+                                    <mainClass>org.rrgames.underground.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -196,32 +254,21 @@
                 </executions>
             </plugin>
         </plugins>
-
-        <sourceDirectory>src/main/java</sourceDirectory>
-
+        <sources>
+            <source>
+                <directory>src/main/java</directory>
+            </source>
+        </sources>
         <resources>
             <resource>
-                <directory>${basedir}</directory>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>${project.rootDirectory}</directory>
                 <includes>
                     <include>haltestellen.txt</include>
                 </includes>
             </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
         </resources>
     </build>
-    <properties>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
-    </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.4.14</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>
