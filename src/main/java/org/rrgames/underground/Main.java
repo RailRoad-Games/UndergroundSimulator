@@ -309,6 +309,7 @@ public class Main {
             }
             if (s.equals("--LauncherEmulation")) {
                 System.out.println("Achtung! Dieses System wird via den Underground Simulator Launcher (v0.5) gestartet. Mögliche Probleme sind zu entschuldigen.");
+                Launcher.main(args);
             }
             System.out.println(s + " wurde als Argument übergeben.");
             if (s.contains("debug")) {
