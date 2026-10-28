@@ -6,19 +6,12 @@
 
 ## Deutsch
 
-Der **Underground Simulator** ist eine hochperformante, CLI-basierte Zugsimulation, die speziell für die realitätsgetreue Koordination und Automatisierung von Schienennetzen entwickelt wurde. Angetrieben von einer maßgeschneiderten Multi-Thread-Architektur bietet das System eine stabile Plattform für den Mehrspielermodus und komplexe Automatisierungsszenarien.
-
-### 🌟 Features
-
-* **Multi-Threaded Server-Architektur** – Native Server-Client-Kommunikation basierend auf dem Netty-Framework für minimale Latenzen im Multiplayer.
-* **TrackScript Integration** – Steuerung von Signalen, Weichen und Fahrstraßen über eine integrierte, performante Skriptsprache inklusive Debugger.
-* **Interaktiver Linien-Editor** – Schnittstelle zur webbasierten Erstellung und Visualisierung von Streckennetzen mittels Leaflet und OpenRailwayMap.
-* **Echtzeit-Simulation** – Präzise Berechnung von Zugbewegungen, Fahrzeiten und Signalabhängigkeiten direkt auf dem Server.
+Der **Underground Simulator** ist eine CLI-basierte Zugsimulation, die als Testprojekt für Java entstand und sich so weiter ausbaute.
 
 ### 🛠️ Technologie-Stack
 
-* **Core:** Java (Server/Engine), Python (TrackScript Runtime/Debugger)
-* **Netzwerk:** Netty Framework
+* **Core:** Java (Server/Engine)
+* **Netzwerk:** Netty Framework (für den Server)
 * **Build-Management:** Maven
 * **Plattformen:** Linux (Optimiert für Ubuntu/Debian), CLI
 
